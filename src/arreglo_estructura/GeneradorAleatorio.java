@@ -1,17 +1,17 @@
 package arreglo_estructura;
 
 public class GeneradorAleatorio {
-    
+
     public int[] generarNumerosAleatorios(int cantidadAleatoria) {
         int[] numerosAleatorios = new int[cantidadAleatoria];
         for (int i = 0; i < cantidadAleatoria; i++) {
-            numerosAleatorios[i] = (int) (Math.random() * cantidadAleatoria); 
+            numerosAleatorios[i] = (int) (Math.random() * cantidadAleatoria);
         }
         return numerosAleatorios;
     }
 
     public void ordenarBurbuja(int[] numeros) {
-         long tiempoInicio = System.nanoTime();
+        long tiempoInicio = System.nanoTime();
         int n = numeros.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -22,15 +22,12 @@ public class GeneradorAleatorio {
                 }
             }
         }
-                long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de BURBUJA en nanosegundos: " + duracionNanosegundos);
-
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("BURBUJA", tiempoInicio, tiempoFin);
     }
 
     public void ordenarInsercion(int[] numeros) {
-          long tiempoInicio = System.nanoTime();
+        long tiempoInicio = System.nanoTime();
         int n = numeros.length;
         for (int i = 1; i < n; ++i) {
             int key = numeros[i];
@@ -42,15 +39,12 @@ public class GeneradorAleatorio {
             }
             numeros[j + 1] = key;
         }
-         long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de INSERCION en nanosegundos: " + duracionNanosegundos);
-
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("INSERCION", tiempoInicio, tiempoFin);
     }
-    
-     public void ordenarSeleccion(int[] numeros) {
-         long tiempoInicio = System.nanoTime();
+
+    public void ordenarSeleccion(int[] numeros) {
+        long tiempoInicio = System.nanoTime();
         int n = numeros.length;
         for (int i = 0; i < n - 1; i++) {
             int minIndex = i;
@@ -63,13 +57,10 @@ public class GeneradorAleatorio {
             numeros[minIndex] = numeros[i];
             numeros[i] = temp;
         }
-                 long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de SELECCION en nanosegundos: " + duracionNanosegundos);
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("SELECCION", tiempoInicio, tiempoFin);
     }
-    
-    // Ejemplo de ordenación por Shell
+
     public void ordenarShell(int[] numeros) {
         long tiempoInicio = System.nanoTime();
         int n = numeros.length;
@@ -83,13 +74,10 @@ public class GeneradorAleatorio {
                 numeros[j] = temp;
             }
         }
-                 long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de SHELL en nanosegundos: " + duracionNanosegundos);
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("SHELL", tiempoInicio, tiempoFin);
     }
 
-    // Ejemplo de ordenación por HeapSort
     public void ordenarHeapSort(int[] numeros) {
         long tiempoInicio = System.nanoTime();
         int n = numeros.length;
@@ -102,14 +90,11 @@ public class GeneradorAleatorio {
             numeros[i] = temp;
             heapify(numeros, i, 0);
         }
-         long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de HEAPSORT en nanosegundos: " + duracionNanosegundos);
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("HEAPSORT", tiempoInicio, tiempoFin);
     }
 
     private void heapify(int[] numeros, int n, int i) {
-      
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -129,10 +114,8 @@ public class GeneradorAleatorio {
 
             heapify(numeros, n, largest);
         }
- 
     }
 
-    // Ejemplo de ordenación por QuickSort
     public void ordenarQuickSort(int[] numeros, int low, int high) {
         long tiempoInicio = System.nanoTime();
         if (low < high) {
@@ -140,12 +123,10 @@ public class GeneradorAleatorio {
             ordenarQuickSort(numeros, low, partitionIndex - 1);
             ordenarQuickSort(numeros, partitionIndex + 1, high);
         }
-            long tiempoFin = System.nanoTime();
-        long duracionNanosegundos = tiempoFin - tiempoInicio;
-
-        System.out.println("Tiempo de ejecución de QUOCK SORT en nanosegundos: " + duracionNanosegundos);
+        long tiempoFin = System.nanoTime();
+        imprimirResultado("QUICKSORT", tiempoInicio, tiempoFin);
     }
-    
+
     private int partition(int[] numeros, int low, int high) {
         int pivot = numeros[high];
         int i = low - 1;
@@ -162,5 +143,27 @@ public class GeneradorAleatorio {
         numeros[high] = temp;
         return i + 1;
     }
-     
+
+    private void imprimirResultado(String metodo, long tiempoInicio, long tiempoFin) {
+        long duracionNanosegundos = tiempoFin - tiempoInicio;
+        long duracionMilisegundos = duracionNanosegundos / 1000000;
+
+        System.out.println("Tiempo de ejecución de " + metodo + " en nanosegundos: " + duracionNanosegundos);
+        System.out.println("Tiempo de ejecución de " + metodo + " en milisegundos: " + duracionMilisegundos);
+        System.out.println();
+    }
+
+    // Main de ejemplo (puedes ajustar según tus necesidades)
+    public static void main(String[] args) {
+        GeneradorAleatorio generador = new GeneradorAleatorio();
+        int cantidadAleatoria = 10000; // Ajusta la cantidad según tus necesidades
+        int[] numeros = generador.generarNumerosAleatorios(cantidadAleatoria);
+
+        generador.ordenarBurbuja(numeros.clone());
+        generador.ordenarInsercion(numeros.clone());
+        generador.ordenarSeleccion(numeros.clone());
+        generador.ordenarShell(numeros.clone());
+        generador.ordenarHeapSort(numeros.clone());
+        generador.ordenarQuickSort(numeros.clone(), 0, numeros.length - 1);
+    }
 }
